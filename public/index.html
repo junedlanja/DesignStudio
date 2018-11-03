@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Design Studio</title>
+    <style type="text/css">
+    canvas {
+        border: 1px solid #000;
+        margin: 6px;
+    }
+
+    .gallery {
+        margin: 10px;
+    }
+
+    .gallery img {
+        margin-left: 16px;
+    }
+
+    .progress-bar {
+        width: 200px;
+        position: relative;
+        height: 8px;
+        margin-top: 4px;
+    }
+
+    .progress-bar .progress {
+        height: 8px;
+        background-color: #ff0000;
+        width: 0;
+    }
+    </style>
+
+    <head>
+        <!-- css | Bootstrap 4.0.0 -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7">
+                <canvas id="canvas"></canvas>
+            </div>
+            <div class="col-sm-5">
+                <div class="form-group mt-5">
+                    <label for="image">Set product : </label>
+                    <input type="file" class="form-control-file" id="addBackground">
+                </div>
+                <div class="form-group">
+                    <label for="text">Add some text :</label>
+                    <div class="input-group mb-3">
+                        <input id="textInput" type="text" class="form-control" placeholder="Some text" aria-label="Some text" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button id="addText" class="btn btn-outline-secondary" type="button">Add Text</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="image">Upload Image</label>
+                    <input type="file" class="form-control-file" id="addImage">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-danger btn-block" id="deleteObj">Delete Active Object</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary btn-block" id="clearDesigns">Clear Designs</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary btn-block" id="export">Export Design</button>
+                </div>
+                <div class="progress-bar" id="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div id="gallery" />
+            </div>
+        </div>
+    </div>
+    <!-- js | jquery 3.3.1 -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <!-- js | bootstrap 4.0.0 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- js | fabric 2.4.3 | Library to intract with canvas -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.4.3/fabric.min.js"></script>
+    <!-- js | designStudio.js | Design studio functions -->
+    <script src="js/designStudio.js" crossorigin="anonymous"></script>
+    <!-- js | index.js | Page UI interaction -->
+    <script src="js/index.js" crossorigin="anonymous"></script>
+</body>
+</head>
+
+<body>
+</body>
+
+</html>
