@@ -1,17 +1,6 @@
 # DesignStudio
 
 We are using fabric.js to manuplate different kind of objects on canvas. Find link here : http://fabricjs.com/
-
-# Folder Structure
-
-`- DesignStudio
-  -node_modules
-  -public
-     -js //our js files
-     -index.html
-  -server.js
-  -package.json
-  -README.md`
   
 # How to run project
 
@@ -38,4 +27,3 @@ We are using fabric.js to manuplate different kind of objects on canvas. Find li
 **clearDesigns()** : Clears all the design from canvas.
 
 **exportDesign()** : Export the existing design as base64 string
-
