@@ -26,9 +26,16 @@ We are using fabric.js to manuplate different kind of objects on canvas. Find li
 # Design studio methods
 
 **createCanvas(canvasId)** : Initialize canvas by providing id of canvas.
+
 **setBackground(image)** : Set canvas background in our cas it will be product image. 
+
 **addText(text)** : Add text on canvas.
+
 **addImage(image)** : Add image on canvas.
+
 **deleteActiveObject()** : Deletes the current active object.
+
 **clearDesigns()** : Clears all the design from canvas.
+
 **exportDesign()** : Export the existing design as base64 string
+
