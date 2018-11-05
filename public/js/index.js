@@ -35,6 +35,7 @@ function uploadFile(file) {
             // File uploaded successfully
             var response = JSON.parse(xhr.responseText);
             // https://res.cloudinary.com/cloudName/image/upload/v1483481128/public_id.jpg
+            console.log('Uploaded image url : ', response.secure_url);
             var url = response.secure_url;
             // Create a thumbnail of the uploaded image, with 150px width
             var tokens = url.split('/');
