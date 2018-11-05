@@ -1,3 +1,10 @@
+//Overright deafult control colors
+fabric.Object.prototype.set({
+    transparentCorners: false,
+    borderColor: '#ff00ff',
+    cornerColor: '#007bff'
+});
+
 //Design studio module
 var DesignStudio = (function() {
     return {
@@ -65,7 +72,7 @@ var DesignStudio = (function() {
             var image = new fabric.Image(_image);
             this.canvas.centerObject(image);
             this.canvas.add(image);
-            canvas.renderAll();
+            this.canvas.renderAll();
         },
 
         //delete the active/selected object
