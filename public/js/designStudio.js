@@ -10,8 +10,8 @@ var DesignStudio = (function() {
     return {
         canvas: null,
 
-        defaultHeight : 600,
-        
+        defaultHeight: 600,
+
         defaultWidth: 600,
 
         //creates the canvas with specified height and width
@@ -24,12 +24,9 @@ var DesignStudio = (function() {
             });
             return this.canvas;
         },
-
-        //to set background (product image)
-        setBackground: function(_image) {
-            if (!_image)
-                throw new Error('image is undefined');
-
+ 
+        //remove backround
+        removeBackground: function() {
             var objects = this.canvas.getObjects();
 
             //if already background is set than remove it
@@ -38,7 +35,10 @@ var DesignStudio = (function() {
             });
             if (backgroundObj)
                 this.canvas.remove(backgroundObj);
-      
+        },
+
+        //common function to set background image
+        _setBackground: function(_image) {
             var ih = _image.naturalHeight,
                 iw = _image.naturalWidth;
 
@@ -49,9 +49,45 @@ var DesignStudio = (function() {
             //scale background image to fit the canvas while maintaining aspect ration
             (ih >= iw) ? image.scaleToHeight(this.canvas.getHeight()): image.scaleToWidth(this.canvas.getWidth());
             this.canvas.centerObject(image);
-            this.canvas.add(image);
+            //always insert at background means on 0 index
+            this.canvas.insertAt(image, 0);
+            this.canvas.renderAll();
         },
- 
+
+        //to set background (product image)
+        setBackground: function(image) {
+            if (!image)
+                throw new Error('image is undefined');
+
+            var objects = this.canvas.getObjects();
+
+            this.removeBackground();
+            this._setBackground(image);
+        },
+
+        //to set background (product image as url)
+        setBackgroundFromURL: function(url) {
+            if (!url)
+                throw new Error('url is undefined');
+
+            var self = this;
+            var objects = this.canvas.getObjects();
+
+            this.removeBackground();
+             
+            //load image
+            var image = new Image();
+            //image successfully loaded
+            image.onload = function() {
+                self._setBackground(image);
+            };
+            //unable to load image due to invalid url or network issue
+            image.onerror = function() {
+                throw new Error('Unable to load image');
+            };
+            image.crossOrigin = "Anonymous";
+            image.src = url;
+        },
 
         //add text 
         addText: function(text) {

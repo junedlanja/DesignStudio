@@ -16,7 +16,11 @@ We are using fabric.js to manuplate different kind of objects on canvas. Find li
 
 **createCanvas(canvasId)** : Initialize canvas by providing id of canvas.
 
-**setBackground(image)** : Set canvas background in our cas it will be product image. 
+**setBackground(image)** : Set canvas background in our case it will be product image. 
+
+**setBackgroundFromURL(url)** : Set canvas background from provided url in our case it will be product image. 
+
+**removeBackground(url)** : To remove existing background.
 
 **addText(text)** : Add text on canvas.
 

@@ -67,9 +67,13 @@ var file = dataURLtoFile('data:text/plain;base64,aGVsbG8gd29ybGQ=', 'hello.txt')
 
 
 $(document).ready(function() {
+    //your product url
+    var url = "https://cdn.shopify.com/s/files/1/0140/5992/9658/products/cup_1_300x300.jpg";
 
     //intialize design studio by creating canvas
     DesignStudio.createCanvas('canvas');
+    //set backgound
+    DesignStudio.setBackgroundFromURL(url);
 
     //add text handler
     $('#addText').on('click', function() {
