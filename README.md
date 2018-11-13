@@ -20,7 +20,7 @@ We are using fabric.js to manuplate different kind of objects on canvas. Find li
 
 **setBackgroundFromURL(url)** : Set canvas background from provided url in our case it will be product image. 
 
-**removeBackground(url)** : To remove existing background.
+**removeBackground()** : To remove existing background.
 
 **addText(text)** : Add text on canvas.
 
