@@ -7,36 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Design Studio</title>
     <style type="text/css">
-    canvas {
-        border: 1px solid #000;
-        margin: 6px;
-    }
 
-    .gallery {
-        margin: 10px;
-    }
-
-    .gallery img {
-        margin-left: 16px;
-    }
-
-    .progress-bar {
-        width: 200px;
-        position: relative;
-        height: 8px;
-        margin-top: 4px;
-    }
-
-    .progress-bar .progress {
-        height: 8px;
-        background-color: #ff0000;
-        width: 0;
-    }
     </style>
 
     <head>
         <!-- css | Bootstrap 4.0.0 -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+            crossorigin="anonymous">
+        <!-- css | Bootstrap colorpicker 2.5.3 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.3/css/bootstrap-colorpicker.min.css"
+            crossorigin="anonymous">
+        <!-- css | Our application css -->
+        <link rel="stylesheet" href="./styles/app.css" />
+        <!-- css | Our fonts css -->
+        <link rel="stylesheet" href="./styles/font.css" />
     </head>
 
 <body>
@@ -46,20 +30,42 @@
                 <canvas id="canvas"></canvas>
             </div>
             <div class="col-sm-5">
-                <div class="form-group mt-5">
+                <div class="form-group mt-2 field-container">
                     <label for="image">Set product : </label>
                     <input type="file" class="form-control-file" id="addBackground">
                 </div>
-                <div class="form-group">
+                <div class="form-group field-container">
                     <label for="text">Add some text :</label>
                     <div class="input-group mb-3">
-                        <input id="textInput" type="text" class="form-control" placeholder="Some text" aria-label="Some text" aria-describedby="basic-addon2">
+                        <input id="textInput" type="text" class="form-control" placeholder="Some text" aria-label="Some text"
+                            aria-describedby="basic-addon2">
                         <div class="input-group-append">
                             <button id="addText" class="btn btn-outline-secondary" type="button">Add Text</button>
                         </div>
                     </div>
+                    <div class="input-group mb-3">
+                        <label for="font-size" class="mr-3">Size:</label>
+                        <select class="form-control" id="font-size">
+                            <option value="24">24</option>
+                            <option value="32">32</option>
+                            <option value="48">48</option>
+                            <option value="72">72</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="font-family" class="mr-3">Font:</label>
+                        <select class="form-control" id="font-family">
+                            <option value="Aardvark Cafe">Aardvark Cafe</option>
+                            <option value="American Purpose">American Purpose</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="font-family" class="mr-3">Color:</label>
+                        <span class="selected-color"></span>
+                        <input id="font-color" type="text" class="form-control" value="rgb(0, 0, 0)" readonly />
+                    </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group field-container">
                     <label for="image">Upload Image</label>
                     <input type="file" class="form-control-file" id="addImage">
                 </div>
@@ -70,21 +76,60 @@
                     <button type="button" class="btn btn-primary btn-block" id="clearDesigns">Clear Designs</button>
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-primary btn-block" id="export">Export Design</button>
+                    <button type="button" class="btn btn-primary btn-block" id="preview">Preview/Export Canvas</button>
                 </div>
-                <div class="progress-bar" id="progress-bar">
-                    <div class="progress" id="progress"></div>
-                </div>
+
                 <div id="gallery" />
             </div>
         </div>
     </div>
+    <div class="modal" id="preview-modal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Design Preview</h4>
+                    <button type="button" class="close" data-dismiss="modal" id="icon-close">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <img id="preview-img" src="" class="img-responsive" />
+                    <div class="progress-bar" id="progress-bar">
+                        <div class="progress" id="progress"></div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="export">Export</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="btn-close">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-success alert-dismissible collapse" role="alert" id="export-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Success!</strong> Design is saved sucessfully!!
+    </div>
+    <div class="alert alert-danger alert-dismissible collapse" role="alert" id="export-error">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Opps!</strong> Something went wrong while exporting design!!
+    </div>
     <!-- js | jquery 3.3.1 -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <!-- js | bootstrap 4.0.0 -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        crossorigin="anonymous"></script>
+    <!-- css | Bootstrap colorpicker 2.5.3 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.3/js/bootstrap-colorpicker.min.js" 
+        crossorigin="anonymous"></script>
     <!-- js | fabric 2.4.3 | Library to intract with canvas -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.4.3/fabric.min.js"></script>
+      <!-- js | webfont 1.6.26 | Library to load fonts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     <!-- js | designStudio.js | Design studio functions -->
     <script src="js/designStudio.js" crossorigin="anonymous"></script>
     <!-- js | index.js | Page UI interaction -->

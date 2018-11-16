@@ -1,0 +1,73 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+    border: 2px dashed #ccc;
+    margin: 6px;
+}
+
+.gallery {
+    margin: 10px;
+}
+
+.gallery img {
+    margin-left: 16px;
+}
+
+#progress-bar {
+    /* width: 200px; */
+    position: relative;
+    height: 8px;
+    margin-top: 4px;
+}
+
+#progress-bar {
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    background-color: #f3e6e6;
+}
+
+#progress-bar .progress {
+    height: 8px;
+    background-color: #272727;
+    width: 0;
+}
+
+#preview-img {
+    display: block;
+    margin: auto;
+    height: 400px;
+    width: 400px;
+}
+
+#export:disabled,
+#btn-close:disabled,
+#icon-close:disabled {
+    cursor: not-allowed
+}
+
+#export-success,
+#export-error {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.field-container {
+    padding: 8px;
+    border: 2px solid #ccc;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+}
+
+.selected-color {
+    width: 32px;
+    height: 32px;
+    margin: 0 5px;
+    background-color: black;
+}

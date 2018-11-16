@@ -6,7 +6,7 @@ fabric.Object.prototype.set({
 });
 
 //Design studio module
-var DesignStudio = (function() {
+var DesignStudio = (function () {
     return {
         canvas: null,
 
@@ -15,7 +15,7 @@ var DesignStudio = (function() {
         defaultWidth: 600,
 
         //creates the canvas with specified height and width
-        createCanvas: function(canvasId) {
+        createCanvas: function (canvasId) {
             if (!canvasId || !document.getElementById(canvasId))
                 throw new Error('Canvas element not found');
             this.canvas = new fabric.Canvas(canvasId, {
@@ -24,13 +24,13 @@ var DesignStudio = (function() {
             });
             return this.canvas;
         },
- 
+
         //remove backround
-        removeBackground: function() {
+        removeBackground: function () {
             var objects = this.canvas.getObjects();
 
             //if already background is set than remove it
-            var backgroundObj = objects.find(function(obj) {
+            var backgroundObj = objects.find(function (obj) {
                 return obj.isCanvasBackground
             });
             if (backgroundObj)
@@ -38,7 +38,7 @@ var DesignStudio = (function() {
         },
 
         //common function to set background image
-        _setBackground: function(_image) {
+        _setBackground: function (_image) {
             var ih = _image.naturalHeight,
                 iw = _image.naturalWidth;
 
@@ -55,7 +55,7 @@ var DesignStudio = (function() {
         },
 
         //to set background (product image)
-        setBackground: function(image) {
+        setBackground: function (image) {
             if (!image)
                 throw new Error('image is undefined');
 
@@ -66,7 +66,7 @@ var DesignStudio = (function() {
         },
 
         //to set background (product image as url)
-        setBackgroundFromURL: function(url) {
+        setBackgroundFromURL: function (url) {
             if (!url)
                 throw new Error('url is undefined');
 
@@ -74,15 +74,15 @@ var DesignStudio = (function() {
             var objects = this.canvas.getObjects();
 
             this.removeBackground();
-             
+
             //load image
             var image = new Image();
             //image successfully loaded
-            image.onload = function() {
+            image.onload = function () {
                 self._setBackground(image);
             };
             //unable to load image due to invalid url or network issue
-            image.onerror = function() {
+            image.onerror = function () {
                 throw new Error('Unable to load image');
             };
             image.crossOrigin = "Anonymous";
@@ -90,19 +90,17 @@ var DesignStudio = (function() {
         },
 
         //add text 
-        addText: function(text) {
+        addText: function (text, options) {
             if (!Boolean(text) || !text.trim().length)
                 throw new Error('text is undefined');
-            var text = new fabric.Text(text, {
-                fill: 'black'
-            });
+            var text = new fabric.Text(text, options ? options : {});
             this.canvas.centerObject(text);
             this.canvas.add(text);
             this.canvas.renderAll();
         },
 
         //add image
-        addImage: function(_image) {
+        addImage: function (_image) {
             if (!_image)
                 throw new Error('image is undefined');
             var image = new fabric.Image(_image);
@@ -112,7 +110,7 @@ var DesignStudio = (function() {
         },
 
         //delete the active/selected object
-        deleteActiveObject: function() {
+        deleteActiveObject: function () {
             if (!this.canvas)
                 throw new Error('No canvas found');
             var activeObj = this.canvas.getActiveObject();
@@ -121,18 +119,18 @@ var DesignStudio = (function() {
         },
 
         //clear all the designs from canvas
-        clearDesigns: function() {
+        clearDesigns: function () {
             if (!this.canvas)
                 throw new Error('No canvas found');
             var objects = this.canvas.getObjects();
-            objects.forEach(function(obj) {
+            objects.forEach(function (obj) {
                 //don't remove background image
                 !obj.isCanvasBackground && this.canvas.remove(obj);
             }.bind(this))
         },
 
         //export canvas design as base64 image
-        exportDesign: function() {
+        exportDesign: function () {
             if (!this.canvas)
                 throw new Error('No canvas found');
             return this.canvas.toDataURL();
