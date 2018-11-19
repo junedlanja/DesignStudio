@@ -28,10 +28,10 @@ function uploadFile(file) {
 
     // Update progress (can be used to show progress indicator)
     xhr.upload.addEventListener("progress", function (e) {
-        var progress = Math.round((e.loaded * 100.0) / e.total);
-        $('#progress').css({
-            width: progress + "%"
-        })
+        // var progress = Math.round((e.loaded * 100.0) / e.total);
+        // $('#progress').css({
+        //     width: progress + "%"
+        // })
     });
 
     xhr.onreadystatechange = function (e) {
@@ -86,7 +86,8 @@ var file = dataURLtoFile('data:text/plain;base64,aGVsbG8gd29ybGQ=', 'hello.txt')
 function showPreviewDetail(src) {
     $('#preview-img').attr("src", src).show();
     $('#preview-modal .modal-title').html('Design Preview');
-    $('#progress-bar').hide();
+    //$('#progress-bar').hide();
+    $('#loader').hide();
     disablePreviewButtons(false);
     $('#preview-modal').modal({
         show: true,
@@ -99,7 +100,8 @@ function showPreviewDetail(src) {
 function showExportDetail() {
     $('#preview-modal .modal-title').html('Exporting Design');
     disablePreviewButtons(true);
-    $('#progress-bar').show();
+    //$('#progress-bar').show();
+    $('#loader').show();
 }
 
 //disable/enable buttons while preview/export 

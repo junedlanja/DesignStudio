@@ -71,3 +71,68 @@ canvas {
     margin: 0 5px;
     background-color: black;
 }
+
+.loader {
+    font-weight: bold;
+    color: #2c2c2c;
+    font-size: 18px;
+    text-align: center
+}
+
+.hourglass {
+    /* display: block;
+    background: #fff;
+    margin: 1em auto;
+    width: 2em;
+    height: 4em;
+    box-shadow:
+        inset #fff 0 0 0 0,
+        inset #00b7c6 0 2em 0 0,
+        inset #fff 0 0 4em 0;
+    animation: hourglass 1s linear infinite; */
+    display: inline-block;
+    background: #fff;
+    margin: -6px 6px;
+    width: 0.75em;
+    height: 1.5em;
+    /* #00b7c6 - is color of hourglass */
+    box-shadow: inset #fff 0 0 0 0, inset #00b7c6 0 2em 0 0, inset #fff 0 0 4em 0;
+    animation: hourglass 1s linear infinite;
+}
+
+.outer {
+    fill: #00b7c6;
+}
+
+.middle {
+    fill: #fff;
+}
+
+@keyframes hourglass {
+    0% {
+        transform: rotate(0deg);
+        box-shadow:
+            inset #fff 0 0 0 0,
+            inset #00b7c6 0 2em 0 0,
+            inset #fff 0 4em 0 0,
+            inset #00b7c6 0 4em 0 0;
+    }
+
+    80% {
+        transform: rotate(0deg);
+        box-shadow:
+            inset #fff 0 2em 0 0,
+            inset #00b7c6 0 2em 0 0,
+            inset #fff 0 2em 0 0,
+            inset #00b7c6 0 4em 0 0;
+    }
+
+    100% {
+        transform: rotate(180deg);
+        box-shadow:
+            inset #fff 0 2em 0 0,
+            inset #00b7c6 0 2em 0 0,
+            inset #fff 0 2em 0 0,
+            inset #00b7c6 0 4em 0 0;
+    }
+}
