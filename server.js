@@ -3,7 +3,7 @@ var express = require('express'),
     app = express();
 
 //set the port
-app.set('port', 3000);
+app.set('port', process.env.PORT || 3000);
 
 //tell express that we want to use the public folder
 //for our static assets
